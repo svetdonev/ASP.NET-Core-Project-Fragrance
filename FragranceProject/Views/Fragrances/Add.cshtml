@@ -6,11 +6,11 @@
 
 <div class="container">
     <div class="row">
-        <div class="offset-md-2 col-md-8 col-sm-12">
-            <h2>Add a Fragrance</h2>
+        <div class="col-sm-12 offset-lg-1 col-lg-8 col-xl-6">
+            <h2 class="heading-margin">Add a Fragrance</h2>
             <form method="post">
                 <div class="form-group text-center">
-                    <img id="ProfilePicturePreview" class="border-info rounded-circle" style="max-width: 150px"/>
+                    <img id="ProfilePicturePreview" class="border-info" style="max-width: 180px"/>
                 </div>
                 <div class="form-group">
                     <label asp-for="Name"></label>
@@ -46,10 +46,13 @@
                         <option>5</option>
                     </select>
                 </div>
+
+                <input class="btn btn-primary" type="submit" value="Add"/>
             </form>
         </div>
     </div>
 </div>
+
 
 @section Scripts{
     <script>
