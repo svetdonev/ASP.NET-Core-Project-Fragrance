@@ -52,6 +52,11 @@ namespace FragranceProject.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public IActionResult All()
+        {
+            return View();
+        }
+
         private IEnumerable<FragranceCategoryViewModel> GetFragranceCategories()
             => this.data
                 .Categories
