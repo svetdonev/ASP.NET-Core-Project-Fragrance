@@ -49,7 +49,7 @@ namespace FragranceProject.Controllers
             this.data.Fragrances.Add(fragranceData);
             this.data.SaveChanges();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("All");
         }
 
         public IActionResult All()
