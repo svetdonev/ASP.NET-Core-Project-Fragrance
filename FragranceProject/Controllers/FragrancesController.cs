@@ -23,7 +23,7 @@ namespace FragranceProject.Controllers
         [HttpPost]
         public IActionResult Add(AddFragranceFormModel fragrance)
         {
-            if(!this.data.Categories.Any(f => f.Id == fragrance.CategoryId))
+            if (!this.data.Categories.Any(f => f.Id == fragrance.CategoryId))
             {
                 this.ModelState.AddModelError(nameof(fragrance.CategoryId), "Category does not exist!");
             }
@@ -54,12 +54,26 @@ namespace FragranceProject.Controllers
 
         public IActionResult All()
         {
-            return View();
+            var fragrances = this.data
+                .Fragrances
+                .OrderByDescending(f => f.Id)
+                .Select(f => new FragranceListingViewModel
+                {
+                    Id = f.Id,
+                    Name = f.Name,
+                    ImageUrl = f.ImageUrl,
+                    Year = f.Year,
+                    Milliliters = f.Milliliters,
+                    Type = f.Type,
+                    Category = f.Category.Name
+                })
+                .ToList();
+
+            return View(fragrances);
         }
 
         private IEnumerable<FragranceCategoryViewModel> GetFragranceCategories()
-            => this.data
-                .Categories
+            => this.data.Categories
                 .Select(f => new FragranceCategoryViewModel
                 {
                     Id = f.Id,

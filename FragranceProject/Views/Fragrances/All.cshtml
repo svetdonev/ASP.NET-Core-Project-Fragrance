@@ -1,5 +1,30 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<FragranceListingViewModel>
+
 @{
+    ViewData["Title"] = "All fragrances - ";
 }
+
+<div class="row">
+    @foreach (var fragrance in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <img class="card-img-top" style="height: auto; width:auto;"  src="@fragrance.ImageUrl" alt="@fragrance.Name">
+                <div class="card-body">
+                    <h5 class="card-title">@fragrance.Name <span>@fragrance.Milliliters ml (@fragrance.Year)</span></h5>
+                    <p class="card-text">@fragrance.Type</p>
+                    <p class="card-text">@fragrance.Category</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Top Notes: </li>
+                    <li class="list-group-item">Middle Notes: </li>
+                    <li class="list-group-item">Base Notes: </li>
+                </ul>
+                <div class="card-body text-center">
+                    <a asp-controller="Fragrances" asp-action="Details" asp-route-id="@fragrance.Id" class="btn btn-primary">Details</a>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
