@@ -5,7 +5,6 @@
 }
 
 
-
 <div class="row">
     @foreach (var fragrance in Model)
     {
@@ -23,10 +22,9 @@
                     <li class="list-group-item">Base Notes: </li>
                 </ul>
                 <div class="card-body text-center">
-                    <a asp-controller="Fragrances" asp-action="Details" asp-route-id="@fragrance.Id" class="btn btn-primary">Details</a>
+                    <a asp-controller="Fragrances" asp-action="Details" asp-route-fragranceId="@fragrance.Id" class="btn btn-primary">Details</a>
                 </div>
             </div>
         </div>
-
     }
 </div>

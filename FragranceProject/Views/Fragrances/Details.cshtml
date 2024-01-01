@@ -1,0 +1,33 @@
+﻿@model FragranceListingViewModel
+
+@{
+    ViewBag.Title = "Details - ";
+}
+
+<div class="mb-5"></div>
+
+<div class="container-fluid">
+    <div class="card text-myWhite">
+
+        <div class="card-body bg-transparent">
+            <div class="row">
+                <div class="col-5">
+                    <img class="mb-3" src="@Model.ImageUrl" height="500" alt="@Model.Name @Model.Year ">
+                </div>
+                <div class="col text-myWhite">
+                    <h3 class="mb-3" style="color: black">@Model.Name (@Model.Year)</h3>
+                    <p style="color: black">@Model.Category</p>
+                    <p style="color: black">Type - @Model.Type</p>
+                    <p style="color: black">Top Notes - </p>
+                    <p style="color: black">Middle Notes - </p>
+                    <p style="color: black">Base Notes - </p>
+
+                    <div class="mt-auto mb-0" style="position: absolute; bottom: 0">
+                        <h4 class="mb-3" style="color: black">Summary</h4>
+                        <h5 class="card-title mb-4 text-left" style="color: black">@Model.Description</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

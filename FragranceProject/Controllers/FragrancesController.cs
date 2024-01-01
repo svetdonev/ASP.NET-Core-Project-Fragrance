@@ -2,6 +2,7 @@
 using FragranceProject.Data.Models;
 using FragranceProject.Models.Fragrances;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -70,6 +71,23 @@ namespace FragranceProject.Controllers
                 .ToList();
 
             return View(fragrances);
+        }
+
+        public IActionResult Details(int fragranceId)
+        {
+            var fragrance = this.data.Fragrances.Include(f => f.Category).FirstOrDefault(f => f.Id == fragranceId);
+
+            return View(new FragranceListingViewModel
+            {
+                Id = fragrance.Id,
+                Name = fragrance.Name,
+                ImageUrl = fragrance.ImageUrl,
+                Description = fragrance.Description,
+                Year = fragrance.Year,
+                Milliliters = fragrance.Milliliters,
+                Type = fragrance.Type,
+                Category = fragrance.Category.Name
+            });
         }
 
         private IEnumerable<FragranceCategoryViewModel> GetFragranceCategories()
