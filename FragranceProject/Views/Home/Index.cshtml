@@ -1,15 +1,15 @@
-﻿@model FragranceListingViewModel
+﻿@model IndexViewModel
 
 @{
-    ViewData["Title"] = "Welcome!";
+    ViewData["Title"] = "Welcome";
 }
 
 <div class="text-center text-myWhite">
     <p class="mb-2" style="font-size: 29px"><Font face="Times New Roman">We have:</Font></p>
     <ul class="list-inline" style="font-size: 18px;">
-        <li class="list-inline-item bg-transparent">Users: 0</li>
-        <li class="list-inline-item bg-transparent ml-2">Fragrances: 0</li>
-        <li class="list-inline-item bg-transparent ml-2">Comments: 0</li>
+        <li class="list-inline-item bg-transparent">Fragrances: @Model.FragrancesCount</li>
+        <li class="list-inline-item bg-transparent ml-2">Comments: @Model.CommentsCount</li>
+        <li class="list-inline-item bg-transparent ml-2">Users: @Model.UsersCount</li>
     </ul>
 
 </div>

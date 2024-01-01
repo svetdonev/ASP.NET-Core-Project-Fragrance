@@ -33,8 +33,15 @@ using FragranceProject.Models.Fragrances;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "C:\Users\Svetlio\Documents\GitHub\ASP.NET-Core-Project-Fragrance\FragranceProject\Views\_ViewImports.cshtml"
+using FragranceProject.Models.Home;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"21f09c85b73e3c030cd9b196867f766af9b29637", @"/Views/Fragrances/All.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d754bb52fcb78c20b247955899c8a95102c8068e", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"573513729475d889a94b0b7b0f5729a2bbdada82", @"/Views/_ViewImports.cshtml")]
     #nullable restore
     public class Views_Fragrances_All : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<FragranceListingViewModel>>
     #nullable disable
@@ -152,7 +159,7 @@ WriteAttributeValue("", 348, fragrance.Name, 348, 15, false);
                 </ul>
                 <div class=""card-body text-center"">
                     ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "21f09c85b73e3c030cd9b196867f766af9b296378043", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "21f09c85b73e3c030cd9b196867f766af9b296378268", async() => {
                 WriteLiteral("Details");
             }
             );
