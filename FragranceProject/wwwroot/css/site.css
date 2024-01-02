@@ -53,8 +53,10 @@ html {
 
 body {
     margin-bottom: 60px;
-    /*background-image: url("../background.png");*/
-    background-color: black;
+    background-image: url("../backgro.png");
+    background-size: cover;
+    background-attachment: fixed;
+    /*background-color: black; */
 }
 
 /*

@@ -18,6 +18,22 @@ namespace FragranceProject.Controllers
 
         public IActionResult Index() 
         {
+            var fragrances = this.data
+                .Fragrances
+                .OrderByDescending(f => f.Id)
+                .Select(f => new FragranceListingViewModel
+                {
+                    Id = f.Id,
+                    Name = f.Name,
+                    ImageUrl = f.ImageUrl,
+                    Year = f.Year,
+                    Milliliters = f.Milliliters,
+                    Type = f.Type,
+                    Category = f.Category.Name
+                })
+                .Take(8)
+                .ToList();
+
             var viewModel = new IndexViewModel
             {
                 FragrancesCount = data.Fragrances.Count(),
@@ -25,7 +41,7 @@ namespace FragranceProject.Controllers
                 //UsersCount= data.Users.Count(),
             };
 
-            return View(viewModel);
+            return View(fragrances);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

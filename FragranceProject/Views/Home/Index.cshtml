@@ -1,15 +1,16 @@
-﻿@model IndexViewModel
+﻿@model List<FragranceListingViewModel>
 
 @{
     ViewData["Title"] = "Welcome";
 }
 
-<div class="text-center text-myWhite">
+<!--
+    <div class="text-center text-myWhite">
     <p class="mb-2" style="font-size: 29px"><Font face="Times New Roman">We have:</Font></p>
     <ul class="list-inline" style="font-size: 18px;">
-        <li class="list-inline-item bg-transparent">Fragrances: @Model.FragrancesCount</li>
-        <li class="list-inline-item bg-transparent ml-2">Comments: @Model.CommentsCount</li>
-        <li class="list-inline-item bg-transparent ml-2">Users: @Model.UsersCount</li>
+        <li class="list-inline-item bg-transparent">Fragrances: </li>
+        <li class="list-inline-item bg-transparent ml-2">Comments: </li>
+        <li class="list-inline-item bg-transparent ml-2">Users: </li>
     </ul>
 
 </div>
@@ -25,6 +26,82 @@
     <img src="~/lemale.jpg" class="img-thumbnail" style="height: 176px;" alt="Le Male Elixir JPG">
     <img src="~/myway.jpg" class="img-thumbnail" style="height: 176px;" alt="Armani My Way">
 </div>
+--> 
+
+@{
+    var first = Model.Any() ? Model[0] : null;
+    var second = Model.Count > 1 ? Model[1] : null;
+    var third = Model.Count > 2 ? Model[2] : null;
+    var fourth = Model.Count > 3 ? Model[3] : null;
+    var fifth = Model.Count > 4 ? Model[4] : null;
+    var sixth = Model.Count > 5 ? Model[5] : null;
+    var seventh = Model.Count > 6 ? Model[6] : null;
+    var eight = Model.Count > 7 ? Model[7] : null;
+}
+
+@if(!Model.Any())
+{
+    <div class="jumbotron">
+        <h1 class="display-4">Welcome to the fragrance world!</h1>
+        <p class="lead">There is no fragrances in the system currently. You can add one!</p>
+        <hr class="my-4">
+        <p class="lead">
+            <a sap-controller="Fragrances" asp-action="Add" class="btn btn-primary btn-lg" role="button">Add Fragrance</a>
+        </p>
+    </div>
+}
+
+<div>
+    @if(first != null)
+    {
+        <a asp-controller="Fragrances" asp-action="Details" asp-route-fragranceId="@first.Id">
+            <img src="@first.ImageUrl" class="img-thumbnail" style="height: 176px;" alt="@first.Name">
+        </a>
+    }
+    @if (second != null)
+    {
+        <a asp-controller="Fragrances" asp-action="Details" asp-route-fragranceId="@second.Id">
+            <img src="@second.ImageUrl" class="img-thumbnail" style="height: 176px;" alt="@second.Name">
+        </a>
+    }
+    @if (third != null)
+    {
+        <a asp-controller="Fragrances" asp-action="Details" asp-route-fragranceId="@third.Id">
+            <img src="@third.ImageUrl" class="img-thumbnail" style="height: 176px;" alt="@third.Name">
+        </a>
+    }
+    @if(fourth != null)
+    {
+        <a asp-controller="Fragrances" asp-action="Details" asp-route-fragranceId="@fourth.Id">
+            <img src="@fourth.ImageUrl" class="img-thumbnail" style="height: 176px;" alt="@fourth.Name">
+        </a>
+    }
+    @if (fifth != null)
+    {
+        <a asp-controller="Fragrances" asp-action="Details" asp-route-fragranceId="@fifth.Id">
+            <img src="@fifth.ImageUrl" class="img-thumbnail" style="height: 176px;" alt="@fifth.Name">
+        </a>
+    }
+    @if(sixth != null)
+    {
+        <a asp-controller="Fragrances" asp-action="Details" asp-route-fragranceId="@sixth.Id">
+            <img src="@sixth.ImageUrl" class="img-thumbnail" style="height: 176px;" alt="@sixth.Name">
+        </a>
+    }
+    @if (seventh != null)
+    {
+        <a asp-controller="Fragrances" asp-action="Details" asp-route-fragranceId="@seventh.Id">
+            <img src="@seventh.ImageUrl" class="img-thumbnail" style="height: 176px;" alt="@seventh.Name">
+        </a>
+    }
+    @if (eight != null)
+    {
+        <a asp-controller="Fragrances" asp-action="Details" asp-route-fragranceId="@eight.Id">
+            <img src="@eight.ImageUrl" class="img-thumbnail" style="height: 176px;" alt="@eight.Name">
+        </a>
+    }
+</div>
+
        
 <div class="mb-3"></div>
 
