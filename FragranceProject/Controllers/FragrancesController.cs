@@ -86,7 +86,8 @@ namespace FragranceProject.Controllers
                 Year = fragrance.Year,
                 Milliliters = fragrance.Milliliters,
                 Type = fragrance.Type,
-                Category = fragrance.Category.Name
+                Category = fragrance.Category.Name,
+
             });
         }
 

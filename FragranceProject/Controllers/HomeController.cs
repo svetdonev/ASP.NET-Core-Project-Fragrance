@@ -18,6 +18,8 @@ namespace FragranceProject.Controllers
 
         public IActionResult Index() 
         {
+            var totalFragrances = this.data.Fragrances.Count();
+
             var fragrances = this.data
                 .Fragrances
                 .OrderByDescending(f => f.Id)
@@ -34,14 +36,11 @@ namespace FragranceProject.Controllers
                 .Take(8)
                 .ToList();
 
-            var viewModel = new IndexViewModel
+            return View(new IndexViewModel
             {
-                FragrancesCount = data.Fragrances.Count(),
-                //CommentsCount = data.Comments.Count(),
-                //UsersCount= data.Users.Count(),
-            };
-
-            return View(fragrances);
+                FragrancesCount = totalFragrances,
+                Fragrances = fragrances
+            });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

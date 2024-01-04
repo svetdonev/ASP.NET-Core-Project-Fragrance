@@ -1,45 +1,36 @@
-﻿@model List<FragranceListingViewModel>
+﻿@model IndexViewModel
 
 @{
     ViewData["Title"] = "Welcome";
 }
 
-<!--
-    <div class="text-center text-myWhite">
+@{
+    var fragrances = Model.Fragrances;
+
+    var first = fragrances.Any() ? fragrances[0] : null;
+    var second = fragrances.Count > 1 ? fragrances[1] : null;
+    var third = fragrances.Count > 2 ? fragrances[2] : null;
+    var fourth = fragrances.Count > 3 ? fragrances[3] : null;
+    var fifth = fragrances.Count > 4 ? fragrances[4] : null;
+    var sixth = fragrances.Count > 5 ? fragrances[5] : null;
+    var seventh = fragrances.Count > 6 ? fragrances[6] : null;
+    var eight = fragrances.Count > 7 ? fragrances[7] : null;
+}
+
+
+<div class="text-center my-colorText">
     <p class="mb-2" style="font-size: 29px"><Font face="Times New Roman">We have:</Font></p>
     <ul class="list-inline" style="font-size: 18px;">
-        <li class="list-inline-item bg-transparent">Fragrances: </li>
-        <li class="list-inline-item bg-transparent ml-2">Comments: </li>
-        <li class="list-inline-item bg-transparent ml-2">Users: </li>
+        <li class="list-inline-item bg-transparent">Fragrances: @Model.FragrancesCount</li>
+        <li class="list-inline-item bg-transparent ml-2">Reviews: @Model.ReviewsCount</li>
+        <li class="list-inline-item bg-transparent ml-2">Users: @Model.UsersCount</li>
     </ul>
 
 </div>
 <div class="mb-3"></div>
 
-<div>
-    <img src="~/goodgirl.jpg" class="img-thumbnail" style="height: 176px;" alt="Good Girl CH">
-    <img src="~/creed.jpg" class="img-thumbnail" style="height: 176px;" alt="Aventus Creed">
-    <img src="~/dior.jpg" class="img-thumbnail" style="height: 176px;" alt="Dior Homme Intense">
-    <img src="~/libre.jpg" class="img-thumbnail" style="height: 176px;" alt="YSL Libre">
-    <img src="~/y.jpg" class="img-thumbnail" style="height: 176px;" alt="YSL Y EDP">
-    <img src="~/you.jpg" class="img-thumbnail" style="height: 176px;" alt="Armani Stronger with You">
-    <img src="~/lemale.jpg" class="img-thumbnail" style="height: 176px;" alt="Le Male Elixir JPG">
-    <img src="~/myway.jpg" class="img-thumbnail" style="height: 176px;" alt="Armani My Way">
-</div>
---> 
 
-@{
-    var first = Model.Any() ? Model[0] : null;
-    var second = Model.Count > 1 ? Model[1] : null;
-    var third = Model.Count > 2 ? Model[2] : null;
-    var fourth = Model.Count > 3 ? Model[3] : null;
-    var fifth = Model.Count > 4 ? Model[4] : null;
-    var sixth = Model.Count > 5 ? Model[5] : null;
-    var seventh = Model.Count > 6 ? Model[6] : null;
-    var eight = Model.Count > 7 ? Model[7] : null;
-}
-
-@if(!Model.Any())
+@if (!fragrances.Any())
 {
     <div class="jumbotron">
         <h1 class="display-4">Welcome to the fragrance world!</h1>
@@ -108,7 +99,20 @@
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="d-block w-100" src="~/1.jpg" alt="First slide">
+            <a asp-controller="Fragrances" asp-action="All">
+                <img class="d-block w-120" src="~/cover.jpg" alt="First slide">
+            </a>
+            
+        </div>
+    </div>
+</div>
+
+<div class="mb-3"></div>
+
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active" style="margin-left: 55px;">
+            <img class="d-block w-120" src="~/cover-2.jpg" alt="First slide">
         </div>
     </div>
 </div>
