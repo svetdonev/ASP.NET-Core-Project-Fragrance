@@ -93,3 +93,12 @@ body {
     box-shadow: 4px 4px 4px #c4ffd1;
     border-radius: 4%;
 }
+
+form.example input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    width: 80%;
+    background: #e6ccff;
+    max-width: 300px;
+}

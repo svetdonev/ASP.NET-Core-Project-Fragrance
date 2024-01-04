@@ -70,7 +70,10 @@ namespace FragranceProject.Controllers
                 })
                 .ToList();
 
-            return View(fragrances);
+            return View(new AllFragrancesQueryModel
+            {
+                Fragrances = fragrances
+            });
         }
 
         public IActionResult Details(int fragranceId)

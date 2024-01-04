@@ -1,12 +1,22 @@
-﻿@model IEnumerable<FragranceListingViewModel>
+﻿@model AllFragrancesQueryModel
 
 @{
     ViewData["Title"] = "All fragrances";
 }
 
+<div class="mb-5"></div>
+
+<form method="get" class="example">
+    <div>
+        <input class="" asp-for="SearchTerm" type="text" placeholder="Type to search..">
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </div>
+</form>
+
+<div class="mb-5"></div>
 
 <div class="row">
-    @foreach (var fragrance in Model)
+    @foreach (var fragrance in Model.Fragrances)
     {
         <div class="col-md-3">
             <div class="card mb-3">
