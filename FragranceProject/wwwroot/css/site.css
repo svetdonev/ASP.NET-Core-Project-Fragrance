@@ -90,7 +90,7 @@ body {
 }
 
 .anchor-shadow a:hover {
-    box-shadow: 4px 4px 4px #c4ffd1;
+    box-shadow: 4px 4px 4px #e7fad7;
     border-radius: 4%;
 }
 
@@ -98,7 +98,20 @@ form.example input[type=text] {
     padding: 10px;
     font-size: 17px;
     border: 1px solid grey;
-    width: 80%;
-    background: #e6ccff;
+    border-radius: 5px;
+    width: 333px;
+    background: #e7fad7;
     max-width: 300px;
+}
+
+form.example button {
+    width: 66px;
+    padding: 10px;
+    background: #47c6f5;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
