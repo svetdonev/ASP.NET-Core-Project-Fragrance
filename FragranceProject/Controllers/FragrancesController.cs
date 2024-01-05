@@ -53,10 +53,16 @@ namespace FragranceProject.Controllers
             return RedirectToAction("All");
         }
 
-        public IActionResult All()
+        public IActionResult All(string searchTerm)
         {
-            var fragrances = this.data
-                .Fragrances
+            var fragrancesQuery = this.data.Fragrances.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                fragrancesQuery = fragrancesQuery.Where(f => f.Name.ToLower().Contains(searchTerm.ToLower()));
+            }
+
+            var fragrances = fragrancesQuery
                 .OrderByDescending(f => f.Id)
                 .Select(f => new FragranceListingViewModel
                 {
@@ -72,7 +78,8 @@ namespace FragranceProject.Controllers
 
             return View(new AllFragrancesQueryModel
             {
-                Fragrances = fragrances
+                Fragrances = fragrances,
+                SearchTerm = searchTerm
             });
         }
 
