@@ -7,6 +7,22 @@
 <div class="mb-5"></div>
 
 <form method="get" class="example">
+    <div class="row-mb-5">
+        <div class="form-group col-md-4">
+            <div class="form-group">
+                <select asp-for="CategoryName" class="form-control">
+                    <option value="">All</option>
+                        @foreach(var category in Model.Categories)
+                        {
+                            <option value="@category">@category</option>
+                        }
+                    </select>
+            </div>
+        </div>
+    </div>
+
+
+
     <div class="container d-flex justify-content-center">
         <div>
             <input class="" asp-for="SearchTerm" type="text" placeholder="Type to search..">
