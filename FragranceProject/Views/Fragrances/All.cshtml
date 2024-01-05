@@ -10,13 +10,13 @@
     <div class="row-mb-5">
         <div class="form-group col-md-4">
             <div class="form-group">
-                <select asp-for="CategoryName" class="form-control">
+                <select asp-for="CategoryName" id="categorySelect" class="form-control">
                     <option value="">All</option>
-                        @foreach(var category in Model.Categories)
-                        {
-                            <option value="@category">@category</option>
-                        }
-                    </select>
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@category">@category</option>
+                    }
+                </select>
             </div>
         </div>
     </div>
@@ -32,12 +32,12 @@
 </form>
 <div class="mb-5"></div>
 
-<div class="row">
+<div class="row" id="fragranceCardsContainer">
     @foreach (var fragrance in Model.Fragrances)
     {
-        <div class="col-md-3">
+        <div class="col-md-3 fragrance-card" data-category="@fragrance.Category">
             <div class="card mb-3">
-                <img class="card-img-top" style="height: auto; width:auto;"  src="@fragrance.ImageUrl" alt="@fragrance.Name">
+                <img class="card-img-top" style="height: auto; width:auto;" src="@fragrance.ImageUrl" alt="@fragrance.Name">
                 <div class="card-body">
                     <h5 class="card-title">@fragrance.Name <span>@fragrance.Milliliters ml (@fragrance.Year)</span></h5>
                     <p class="card-text">@fragrance.Type</p>
@@ -55,3 +55,21 @@
         </div>
     }
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var categorySelect = document.getElementById('categorySelect');
+
+        categorySelect.addEventListener('change', function () {
+            var selectedValue = categorySelect.value;
+
+            var fragranceCards = document.querySelectorAll('.fragrance-card');
+
+            fragranceCards.forEach(function (card) {
+                var showCard = selectedValue === '' || card.dataset.category === selectedValue;
+
+                card.style.display = showCard ? 'block' : 'none';
+            });
+        });
+    });
+</script>
