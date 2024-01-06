@@ -53,28 +53,32 @@ namespace FragranceProject.Controllers
             return RedirectToAction("All");
         }
 
-        public IActionResult All(string categoryName, string searchTerm, FragranceSorting sorting)
+        public IActionResult All([FromQuery]AllFragrancesQueryModel query)
         {
             var fragrancesQuery = this.data.Fragrances.AsQueryable();
 
-            if(!string.IsNullOrWhiteSpace(categoryName))
+            if(!string.IsNullOrWhiteSpace(query.CategoryName))
             {
-                fragrancesQuery = fragrancesQuery.Where(f => f.Category.Name == categoryName);
+                fragrancesQuery = fragrancesQuery.Where(f => f.Category.Name == query.CategoryName);
             }
 
-            if (!string.IsNullOrWhiteSpace(searchTerm))
+            if (!string.IsNullOrWhiteSpace(query.SearchTerm))
             {
-                fragrancesQuery = fragrancesQuery.Where(f => f.Name.ToLower().Contains(searchTerm.ToLower()));
+                fragrancesQuery = fragrancesQuery.Where(f => f.Name.ToLower().Contains(query.SearchTerm.ToLower()));
             }
 
-            fragrancesQuery = sorting switch
+            fragrancesQuery = query.Sorting switch
             {
                 FragranceSorting.Year => fragrancesQuery.OrderByDescending(f => f.Year),
                 FragranceSorting.Name => fragrancesQuery.OrderBy(f => f.Name),
                 FragranceSorting.DateCreated or _ => fragrancesQuery.OrderByDescending(f => f.Id)
             };
 
+            var totalFragrances = this.data.Fragrances.Count();
+
             var fragrances = fragrancesQuery
+                .Skip((query.CurrentPage - 1) * AllFragrancesQueryModel.FragrancesPerPage)
+                .Take(AllFragrancesQueryModel.FragrancesPerPage)
                 .Select(f => new FragranceListingViewModel
                 {
                     Id = f.Id,
@@ -93,13 +97,12 @@ namespace FragranceProject.Controllers
                 .Distinct()
                 .ToList();
 
-            return View(new AllFragrancesQueryModel
-            {
-                Categories = categories,
-                Fragrances = fragrances,
-                SearchTerm = searchTerm,
-                Sorting = sorting
-            });
+            query.Fragrances = fragrances;
+            query.Categories = categories;
+            query.TotalFragrances = totalFragrances;
+
+
+            return View(query);
         }
 
         public IActionResult Details(int fragranceId)
