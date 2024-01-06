@@ -95,7 +95,6 @@ body {
 }
 
 form.example input[type=text] {
-    padding: 10px;
     font-size: 17px;
     border: 1px solid grey;
     border-radius: 5px;
@@ -105,8 +104,7 @@ form.example input[type=text] {
 }
 
 form.example button {
-    width: 66px;
-    padding: 10px;
+    width: 58px;
     background: #47c6f5;
     color: white;
     font-size: 17px;
@@ -114,4 +112,8 @@ form.example button {
     border-left: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.col-md-4.d-flex.align-items-center {
+    margin-top: -12px;
 }
