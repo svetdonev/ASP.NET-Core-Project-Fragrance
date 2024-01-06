@@ -75,7 +75,6 @@ namespace FragranceProject.Controllers
             };
 
             var fragrances = fragrancesQuery
-                .OrderByDescending(f => f.Id)
                 .Select(f => new FragranceListingViewModel
                 {
                     Id = f.Id,

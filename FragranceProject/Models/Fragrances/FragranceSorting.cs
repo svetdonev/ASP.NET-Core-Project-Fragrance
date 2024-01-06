@@ -2,8 +2,8 @@
 {
     public enum FragranceSorting
     {
-        DateCreated,
-        Year,
-        Name
+        DateCreated = 0,
+        Name = 1,
+        Year = 2
     }
 }
