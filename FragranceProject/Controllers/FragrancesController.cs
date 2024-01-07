@@ -39,7 +39,6 @@ namespace FragranceProject.Controllers
             var fragranceData = new Fragrance
             {
                 Name = fragrance.Name,
-                Milliliters = fragrance.Milliliters,
                 Year = fragrance.Year,
                 Description = fragrance.Description,
                 Type = fragrance.Type,
@@ -74,18 +73,13 @@ namespace FragranceProject.Controllers
                 FragranceSorting.DateCreated or _ => fragrancesQuery.OrderByDescending(f => f.Id)
             };
 
-            var totalFragrances = this.data.Fragrances.Count();
-
             var fragrances = fragrancesQuery
-                .Skip((query.CurrentPage - 1) * AllFragrancesQueryModel.FragrancesPerPage)
-                .Take(AllFragrancesQueryModel.FragrancesPerPage)
                 .Select(f => new FragranceListingViewModel
                 {
                     Id = f.Id,
                     Name = f.Name,
                     ImageUrl = f.ImageUrl,
                     Year = f.Year,
-                    Milliliters = f.Milliliters,
                     Type = f.Type,
                     Category = f.Category.Name
                 })
@@ -97,12 +91,13 @@ namespace FragranceProject.Controllers
                 .Distinct()
                 .ToList();
 
-            query.Fragrances = fragrances;
-            query.Categories = categories;
-            query.TotalFragrances = totalFragrances;
-
-
-            return View(query);
+            return View(new AllFragrancesQueryModel
+            {
+                Categories = categories,
+                Fragrances = fragrances,
+                SearchTerm = query.SearchTerm,
+                Sorting = query.Sorting
+            });
         }
 
         public IActionResult Details(int fragranceId)
@@ -116,7 +111,6 @@ namespace FragranceProject.Controllers
                 ImageUrl = fragrance.ImageUrl,
                 Description = fragrance.Description,
                 Year = fragrance.Year,
-                Milliliters = fragrance.Milliliters,
                 Type = fragrance.Type,
                 Category = fragrance.Category.Name,
 
