@@ -6,10 +6,12 @@ namespace FragranceProject.Models.Fragrances
 {
     public class AddFragranceFormModel
     {
-        public int Id { get; set; }
         [Required]
         [StringLength(FragranceNameMaxLength, MinimumLength = FragranceNameMinLength, ErrorMessage = "The Name field must be between {2} and {1} characters!")]
         public string Name { get; init; }
+
+        [Required]
+        public int Milliliters { get; init; }
 
         [Range(FragranceYearMinValue, FragranceYearMaxValue, ErrorMessage = "The Year field must be between {1} and {2} characters!")]
         public int Year { get; init; }

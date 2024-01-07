@@ -1,5 +1,4 @@
-﻿using FragranceProject.Models.Fragrances;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using static FragranceProject.Data.DataConstants;
 
 namespace FragranceProject.Data.Models
@@ -11,6 +10,9 @@ namespace FragranceProject.Data.Models
         [Required]
         [MaxLength(FragranceNameMaxLength)]
         public string Name { get; set; }
+
+        [Required]
+        public int Milliliters { get; set; }
 
         [Required]
         public int Year { get; set; }

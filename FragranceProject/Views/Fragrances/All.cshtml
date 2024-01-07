@@ -10,7 +10,6 @@
     <div class="row mb-5">
         <div class="col-md-4">
             <div class="form-group">
-                <label asp-for="CategoryName">Category</label>
                 <select asp-for="CategoryName" id="categorySelect" class="form-control">
                     <option value="">All</option>
                     @foreach (var category in Model.Categories)
@@ -60,33 +59,31 @@
            asp-controller="Fragrances"
            asp-action="All"
            asp-route-currentPage="@previousPage"
-           asp-route-categoryName="@Model.CategoryName"
            asp-route-searchTerm="@Model.SearchTerm">&#8249; Previous</a>
             </div>
 
             <div class="col-md-6">
-                <a class="btn btn-default float-right @(Model.CurrentPage == maxPage ? "disabled" : string.Empty)" style="color: black; background-color: #47c6f5"
+                <a class="btn btn-default float-right @(Model.CurrentPage == maxPage ? "disabled" : string.Empty)" style="color: black; background-color: #47c6f5;"
            asp-controller="Fragrances"
            asp-action="All"
            asp-route-currentPage="@(Model.CurrentPage + 1)"
-           asp-route-categoryName="@Model.CategoryName"
            asp-route-searchTerm="@Model.SearchTerm">Next &#8250;</a>
             </div>
         </div>
     }
 }
 
-<div class="mb-3"></div>
 
+<div class="mb-5"></div>
 
 <div class="row" id="fragranceCardsContainer">
     @foreach (var fragrance in Model.Fragrances)
     {
-        <div class="col-md-3 fragrance-card" data-category="@fragrance.Category">
+        <div class="col-md-3 fragrance-card" data-category="@fragrance.Category" data-sorting="@Model.Sorting">
             <div class="card mb-3">
                 <img class="card-img-top" style="height: auto; width:auto;" src="@fragrance.ImageUrl" alt="@fragrance.Name">
                 <div class="card-body">
-                    <h5 class="card-title">@fragrance.Name (@fragrance.Year)</h5>
+                    <h5 class="card-title">@fragrance.Name <span>@fragrance.Milliliters ml (@fragrance.Year)</span></h5>
                     <p class="card-text">@fragrance.Type</p>
                     <p class="card-text">@fragrance.Category</p>
                 </div>
@@ -97,7 +94,6 @@
                 </ul>
                 <div class="card-body text-center">
                     <a asp-controller="Fragrances" asp-action="Details" asp-route-fragranceId="@fragrance.Id" class="btn btn-primary">Details</a>
-                    <a style="color: black" asp-controller="Fragrances" asp-action="Delete" asp-route-fragranceId="@fragrance.Id" class="btn btn-outline-warning">Delete</a>
                 </div>
             </div>
         </div>
@@ -107,11 +103,11 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var categorySelect = document.getElementById('categorySelect');
+        var sortingSelect = document.getElementById('sortingSelect');
+        var fragranceCards = document.querySelectorAll('.fragrance-card');
 
         categorySelect.addEventListener('change', function () {
             var selectedValue = categorySelect.value;
-
-            var fragranceCards = document.querySelectorAll('.fragrance-card');
 
             fragranceCards.forEach(function (card) {
                 var showCard = selectedValue === '' || card.dataset.category === selectedValue;
