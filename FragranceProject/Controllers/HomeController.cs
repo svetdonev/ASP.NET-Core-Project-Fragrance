@@ -29,7 +29,6 @@ namespace FragranceProject.Controllers
                     Name = f.Name,
                     ImageUrl = f.ImageUrl,
                     Year = f.Year,
-                    Milliliters = f.Milliliters,
                     Type = f.Type,
                     Category = f.Category.Name
                 })

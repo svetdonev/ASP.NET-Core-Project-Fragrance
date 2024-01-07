@@ -1,10 +1,12 @@
 ﻿using FragranceProject.Data;
 using FragranceProject.Data.Models;
 using FragranceProject.Models.Fragrances;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FragranceProject.Controllers
 {
@@ -39,7 +41,6 @@ namespace FragranceProject.Controllers
             var fragranceData = new Fragrance
             {
                 Name = fragrance.Name,
-                Milliliters = fragrance.Milliliters,
                 Year = fragrance.Year,
                 Description = fragrance.Description,
                 Type = fragrance.Type,
@@ -74,7 +75,7 @@ namespace FragranceProject.Controllers
                 FragranceSorting.DateCreated or _ => fragrancesQuery.OrderByDescending(f => f.Id)
             };
 
-            var totalFragrances = this.data.Fragrances.Count();
+            var totalFragrances = fragrancesQuery.Count();
 
             var fragrances = fragrancesQuery
                 .Skip((query.CurrentPage - 1) * AllFragrancesQueryModel.FragrancesPerPage)
@@ -85,7 +86,6 @@ namespace FragranceProject.Controllers
                     Name = f.Name,
                     ImageUrl = f.ImageUrl,
                     Year = f.Year,
-                    Milliliters = f.Milliliters,
                     Type = f.Type,
                     Category = f.Category.Name
                 })
@@ -116,7 +116,6 @@ namespace FragranceProject.Controllers
                 ImageUrl = fragrance.ImageUrl,
                 Description = fragrance.Description,
                 Year = fragrance.Year,
-                Milliliters = fragrance.Milliliters,
                 Type = fragrance.Type,
                 Category = fragrance.Category.Name,
 
@@ -131,5 +130,38 @@ namespace FragranceProject.Controllers
                     Name = f.Name,
                 })
                 .ToList();
+
+        [HttpGet]
+        public IActionResult Delete(int fragranceId)
+        {
+            var fragrance = this.data.Fragrances.FirstOrDefault(f => f.Id == fragranceId);
+
+            if (fragrance == null)
+            {
+                return NotFound();
+            }
+
+            return View(new FragranceListingViewModel
+            {
+                Id = fragranceId,
+            });
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int fragranceId)
+        {
+            var fragrance = this.data.Fragrances.FirstOrDefault(m => m.Id == fragranceId);
+
+            if (fragrance == null)
+            {
+                return NotFound();
+            }
+
+            this.data.Fragrances.Remove(fragrance);
+            this.data.SaveChanges();
+
+            return RedirectToAction(nameof(All));
+        }
     }
 }

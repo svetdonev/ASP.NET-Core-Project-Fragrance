@@ -40,9 +40,9 @@
                 <div class="form-group my-colorText">
                     <label asp-for="CategoryId"></label>
                     <select asp-for="CategoryId" class="form-control">
-                        @foreach(var category in Model.Categories)
+                        @foreach (var category in Model.Categories)
                         {
-                            <option value="@category.Id">@category.Name</option>
+                                <option value="@category.Id">@category.Name</option>
                         }
                     </select>
                 </div>
@@ -55,16 +55,16 @@
 
 
 @section Scripts{
-    <script>
-        $(document).ready(function () {
-            var output = document.getElementById('ProfilePicturePreview');
-            var imageUrlInput = $('#ImageUrl');
+        <script>
+            $(document).ready(function () {
+                var output = document.getElementById('ProfilePicturePreview');
+                var imageUrlInput = $('#ImageUrl');
 
-            output.src = imageUrlInput.val();
+                output.src = imageUrlInput.val();
 
-            imageUrlInput.on("input", function () {
-                output.src = $(this).val();
+                imageUrlInput.on("input", function () {
+                    output.src = $(this).val();
+                });
             });
-        });
-    </script>
+        </script>
 }

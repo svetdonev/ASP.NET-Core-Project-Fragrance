@@ -399,3 +399,5 @@ C:\Users\Svetlio\Documents\GitHub\ASP.NET-Core-Project-Fragrance\FragranceProjec
 C:\Users\Svetlio\Documents\GitHub\ASP.NET-Core-Project-Fragrance\FragranceProject\obj\Debug\net5.0\Razor\Views\Fragrances\Add.cshtml.g.cs
 C:\Users\Svetlio\Documents\GitHub\ASP.NET-Core-Project-Fragrance\FragranceProject\obj\Debug\net5.0\Razor\Views\Fragrances\All.cshtml.g.cs
 C:\Users\Svetlio\Documents\GitHub\ASP.NET-Core-Project-Fragrance\FragranceProject\obj\Debug\net5.0\Razor\Views\Fragrances\Details.cshtml.g.cs
+C:\Users\Svetlio\Documents\GitHub\ASP.NET-Core-Project-Fragrance\FragranceProject\obj\Debug\net5.0\Razor\Views\Fragrances\Edit.cshtml.g.cs
+C:\Users\Svetlio\Documents\GitHub\ASP.NET-Core-Project-Fragrance\FragranceProject\obj\Debug\net5.0\Razor\Views\Fragrances\Delete.cshtml.g.cs
