@@ -12,9 +12,6 @@ namespace FragranceProject.Data.Models
         public string Name { get; set; }
 
         [Required]
-        public int Milliliters { get; set; }
-
-        [Required]
         public int Year { get; set; }
 
         [Required]

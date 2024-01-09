@@ -66,13 +66,6 @@ namespace FragranceProject.Controllers
                 fragrancesQuery = fragrancesQuery.Where(f => f.Name.ToLower().Contains(query.SearchTerm.ToLower()));
             }
 
-            fragrancesQuery = query.Sorting switch
-            {
-                FragranceSorting.Year => fragrancesQuery.OrderByDescending(f => f.Year),
-                FragranceSorting.Name => fragrancesQuery.OrderBy(f => f.Name),
-                FragranceSorting.DateCreated or _ => fragrancesQuery.OrderByDescending(f => f.Id)
-            };
-
             var fragrances = fragrancesQuery
                 .Select(f => new FragranceListingViewModel
                 {
@@ -95,9 +88,38 @@ namespace FragranceProject.Controllers
             {
                 Categories = categories,
                 Fragrances = fragrances,
-                SearchTerm = query.SearchTerm,
-                Sorting = query.Sorting
+                SearchTerm = query.SearchTerm
             });
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int fragranceId)
+        {
+            var fragrance = this.data.Fragrances.FirstOrDefault(f => f.Id == fragranceId);
+
+            if(fragrance == null )
+            {
+                return NotFound();
+            }
+
+            return View(new FragranceListingViewModel { Id = fragranceId });
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int fragranceId)
+        {
+            var fragrance = this.data.Fragrances.FirstOrDefault(f => f.Id == fragranceId);
+
+            if (fragrance == null)
+            {
+                return NotFound();
+            }
+
+            this.data.Fragrances.Remove(fragrance);
+            this.data.SaveChanges();
+
+            return RedirectToAction(nameof(All));
         }
 
         public IActionResult Details(int fragranceId)
