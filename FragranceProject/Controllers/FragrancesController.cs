@@ -38,6 +38,7 @@ namespace FragranceProject.Controllers
 
             var fragranceData = new Fragrance
             {
+                Id = fragrance.Id,
                 Name = fragrance.Name,
                 Year = fragrance.Year,
                 Description = fragrance.Description,
@@ -137,6 +138,54 @@ namespace FragranceProject.Controllers
                 Category = fragrance.Category.Name,
 
             });
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int fragranceId)
+        {
+            var fragrance = this.data.Fragrances.FirstOrDefault(f => f.Id == fragranceId);
+
+            if(fragrance == null)
+            {
+                return NotFound();
+            }
+
+            return View(new AddFragranceFormModel
+            {
+                Id = fragrance.Id,
+                Name = fragrance.Name,
+                Year = fragrance.Year,
+                Description = fragrance.Description,
+                Type = fragrance.Type,
+                ImageUrl = fragrance.ImageUrl,
+                CategoryId = fragrance.CategoryId
+            });
+        }
+
+        [HttpPost]
+        public IActionResult Edit(AddFragranceFormModel fragranceModel)
+        {
+            var fragrance = this.data.Fragrances.FirstOrDefault(f => f.Id == fragranceModel.Id);
+
+            if (fragrance == null)
+            {
+                return NotFound();
+            }
+
+            if(!ModelState.IsValid)
+            {
+                return View(fragrance);
+            }
+
+            fragrance.Name = fragranceModel.Name;
+            fragrance.Year = fragranceModel.Year;
+            fragrance.Description = fragranceModel.Description;
+            fragrance.Type = fragranceModel.Type;
+            fragrance.ImageUrl = fragranceModel.ImageUrl;
+
+            this.data.SaveChanges();
+
+            return Redirect($"/Fragrances/Details?fragranceId={fragrance.Id}");
         }
 
         private IEnumerable<FragranceCategoryViewModel> GetFragranceCategories()
