@@ -53,11 +53,11 @@ namespace FragranceProject.Controllers
             return RedirectToAction("All");
         }
 
-        public IActionResult All([FromQuery]AllFragrancesQueryModel query)
+        public IActionResult All([FromQuery] AllFragrancesQueryModel query)
         {
             var fragrancesQuery = this.data.Fragrances.AsQueryable();
 
-            if(!string.IsNullOrWhiteSpace(query.CategoryName))
+            if (!string.IsNullOrWhiteSpace(query.CategoryName))
             {
                 fragrancesQuery = fragrancesQuery.Where(f => f.Category.Name == query.CategoryName);
             }
@@ -98,7 +98,7 @@ namespace FragranceProject.Controllers
         {
             var fragrance = this.data.Fragrances.FirstOrDefault(f => f.Id == fragranceId);
 
-            if(fragrance == null )
+            if (fragrance == null)
             {
                 return NotFound();
             }
@@ -145,7 +145,7 @@ namespace FragranceProject.Controllers
         {
             var fragrance = this.data.Fragrances.FirstOrDefault(f => f.Id == fragranceId);
 
-            if(fragrance == null)
+            if (fragrance == null)
             {
                 return NotFound();
             }
@@ -172,7 +172,7 @@ namespace FragranceProject.Controllers
                 return NotFound();
             }
 
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(fragrance);
             }

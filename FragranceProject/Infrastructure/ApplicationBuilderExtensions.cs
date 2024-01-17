@@ -23,7 +23,7 @@ namespace FragranceProject.Infrastructure
 
         private static void SeedCategories(FragranceDbContext data)
         {
-            if(data.Categories.Any())
+            if (data.Categories.Any())
             {
                 return;
             }

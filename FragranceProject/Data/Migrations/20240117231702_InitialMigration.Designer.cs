@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FragranceProject.Data.Migrations
 {
     [DbContext(typeof(FragranceDbContext))]
-    [Migration("20231229221317_FragranceAndCategoryTables")]
-    partial class FragranceAndCategoryTables
+    [Migration("20240117231702_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,9 +54,6 @@ namespace FragranceProject.Data.Migrations
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Milliliters")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()

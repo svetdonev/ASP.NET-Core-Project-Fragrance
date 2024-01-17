@@ -24,7 +24,7 @@ namespace FragranceProject.Models.Fragrances
 
         [Required]
         [Url]
-        [Display(Name="Image URL")]
+        [Display(Name = "Image URL")]
         public string ImageUrl { get; init; }
 
         [Display(Name = "Category")]
