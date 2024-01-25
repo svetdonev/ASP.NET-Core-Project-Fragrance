@@ -1,4 +1,5 @@
 using FragranceProject.Data;
+using FragranceProject.Data.Models;
 using FragranceProject.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -18,12 +19,12 @@ namespace FragranceProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<FragranceDbContext>(options => options
-                .UseSqlServer(Configuration
+                .UseSqlServer(this.Configuration
                     .GetConnectionString("DefaultConnection")));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options =>
+            services.AddDefaultIdentity<User>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireLowercase = false;
@@ -31,6 +32,7 @@ namespace FragranceProject
                 options.Password.RequireDigit = false;
             })
             .AddEntityFrameworkStores<FragranceDbContext>();
+
             services.AddControllersWithViews();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -1,18 +1,24 @@
 ﻿using FragranceProject.Data;
 using FragranceProject.Data.Models;
 using FragranceProject.Models.Fragrances;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FragranceProject.Controllers
 {
     public class FragrancesController : Controller
     {
         private readonly FragranceDbContext data;
-        public FragrancesController(FragranceDbContext data)
-            => this.data = data;
+        private readonly UserManager<User> userManager;
+        public FragrancesController(FragranceDbContext data, UserManager<User> userManager)
+        {
+            this.data = data;
+            this.userManager = userManager;
+        }
         public IActionResult Add()
         {
             return View(new AddFragranceFormModel
@@ -38,7 +44,6 @@ namespace FragranceProject.Controllers
 
             var fragranceData = new Fragrance
             {
-                Id = fragrance.Id,
                 Name = fragrance.Name,
                 Year = fragrance.Year,
                 Description = fragrance.Description,
@@ -53,9 +58,12 @@ namespace FragranceProject.Controllers
             return RedirectToAction("All");
         }
 
-        public IActionResult All([FromQuery] AllFragrancesQueryModel query)
+        public async Task<IActionResult> All([FromQuery] AllFragrancesQueryModel query)
         {
             var fragrancesQuery = this.data.Fragrances.AsQueryable();
+
+            var user = await this.userManager.GetUserAsync(this.User);
+            var userId = user == null ? null : user.Id;
 
             if (!string.IsNullOrWhiteSpace(query.CategoryName))
             {
@@ -94,7 +102,7 @@ namespace FragranceProject.Controllers
         }
 
         [HttpGet]
-        public IActionResult Delete(int fragranceId)
+        public IActionResult Delete(string fragranceId)
         {
             var fragrance = this.data.Fragrances.FirstOrDefault(f => f.Id == fragranceId);
 
@@ -108,7 +116,7 @@ namespace FragranceProject.Controllers
 
         [HttpPost]
         [ActionName("Delete")]
-        public IActionResult DeleteConfirmed(int fragranceId)
+        public IActionResult DeleteConfirmed(string fragranceId)
         {
             var fragrance = this.data.Fragrances.FirstOrDefault(f => f.Id == fragranceId);
 
@@ -123,7 +131,7 @@ namespace FragranceProject.Controllers
             return RedirectToAction(nameof(All));
         }
 
-        public IActionResult Details(int fragranceId)
+        public IActionResult Details(string fragranceId)
         {
             var fragrance = this.data.Fragrances.Include(f => f.Category).FirstOrDefault(f => f.Id == fragranceId);
 
@@ -141,7 +149,7 @@ namespace FragranceProject.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int fragranceId)
+        public IActionResult Edit(string fragranceId)
         {
             var fragrance = this.data.Fragrances.FirstOrDefault(f => f.Id == fragranceId);
 
