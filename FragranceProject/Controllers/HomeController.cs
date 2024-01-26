@@ -19,6 +19,7 @@ namespace FragranceProject.Controllers
         public IActionResult Index() 
         {
             var totalFragrances = this.data.Fragrances.Count();
+            var totalUsers = this.data.Users.Count();
 
             var fragrances = this.data
                 .Fragrances
@@ -38,6 +39,7 @@ namespace FragranceProject.Controllers
             return View(new IndexViewModel
             {
                 FragrancesCount = totalFragrances,
+                UsersCount = totalUsers,
                 Fragrances = fragrances
             });
         }
